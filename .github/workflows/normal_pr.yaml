@@ -23,7 +23,7 @@ jobs:
       - run: echo "${{fromJSON(steps.PR.outputs.pr).draft}}"
       - 
         name: Check PR type
-        if:  fromJSON(steps.PR.outputs.pr).draft  != false || fromJSON(steps.PR.outputs.pr).draft  == ''
+        if:  fromJSON(steps.PR.outputs.pr).draft != false
         run: exit 1
         
         
