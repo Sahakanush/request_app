@@ -4,9 +4,6 @@ on:
   push:
     branches: feature
     
-  pull_request:
-    types: [ready_for_review]
-    
   pull_request_target:
     types: [ready_for_review]
     
@@ -20,11 +17,10 @@ jobs:
       - 
         uses: 8BitJonny/gh-get-current-pr@2.1.1
         id: PR
-      
-      - run: echo "${{ steps.PR.outputs.pr }}"
+        
       - 
         name: Check PR type
-        if:  fromJSON(steps.PR.outputs.pr).draft != false
+        if:  fromJSON(steps.PR.outputs.pr).draft != false || github.event_name != 'pull_request_target'
         run: exit 1
         
         
