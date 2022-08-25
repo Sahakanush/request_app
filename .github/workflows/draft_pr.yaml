@@ -1,0 +1,47 @@
+name: draft_pr
+
+on:
+  push:
+    branches: feature
+    
+jobs:
+  check_pr_type:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: actions/checkout@v3  
+        
+      - uses: 8BitJonny/gh-get-current-pr@2.1.1
+        id: PR       
+      
+      - name: Check PR type
+        if:  fromJSON(steps.PR.outputs.pr).draft  == false
+        run: exit 1
+        
+  unit_test:
+    runs-on: ubuntu-latest    
+    needs: [check_pr_type]
+    steps:
+      
+      - 
+        name: Run Unit Test
+        working-directory: ./developers_code
+        id: Pytest
+        
+        run: |
+          pip3 install -r ../.github/requirements_for_pytest.txt         
+          pytest unit_test.py 
+          
+        continue-on-error: true
+              
+      - 
+        name: UT success
+        
+        if: steps.Pytest.outcome == 'success'         
+        run: echo "UT success !!"
+        
+      - 
+        name: UT failure
+        
+        if: steps.Pytest.outcome != 'success'         
+        run: echo "UT failure !!"
