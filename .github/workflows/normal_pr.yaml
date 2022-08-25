@@ -19,9 +19,7 @@ jobs:
         
       - 
         uses: 8BitJonny/gh-get-current-pr@2.1.1
-        id: PR       
-        
-      - run: echo "${{fromJSON(steps.PR.outputs.pr).draft}}"
+        id: PR
       
       - run: echo "${{ steps.PR.outputs.pr }}"
       - 
