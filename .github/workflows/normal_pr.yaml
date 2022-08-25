@@ -20,7 +20,7 @@ jobs:
         
       - 
         name: Check PR type
-        if:  fromJSON(steps.PR.outputs.pr).draft != false || github.event_name != 'pull_request_target'
+        if:  fromJSON(steps.PR.outputs.pr).draft != false   # || github.event_name != 'pull_request_target'
         run: exit 1
         
         
