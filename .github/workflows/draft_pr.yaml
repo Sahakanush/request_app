@@ -15,7 +15,7 @@ jobs:
         id: PR       
       
       - name: Check PR type
-        if:  fromJSON(steps.PR.outputs.pr).draft  == false
+        if:  fromJSON(steps.PR.outputs.pr).draft  != true
         run: exit 1
         
   unit_test:
