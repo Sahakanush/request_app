@@ -14,15 +14,14 @@ jobs:
       - 
         uses: actions/checkout@v3  
         
-      - 
+      - if: github.event_name == 'push'
         uses: 8BitJonny/gh-get-current-pr@2.1.1
         id: PR
         
       - 
         name: Check PR type
-        if:  fromJSON(steps.PR.outputs.pr).draft != false   # || github.event_name != 'pull_request_target'
+        if: github.event_name == 'push' && fromJSON(steps.PR.outputs.pr).draft != false 
         run: exit 1
-        
         
   ACR_operations:
     runs-on: ubuntu-latest    
