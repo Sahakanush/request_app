@@ -43,7 +43,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           append_to_pre_release_tag: RC
           
-      - run: echo "${{steps.tag_version.outputs.new_tag}"
+      - run: echo "${{steps.tag_version.outputs.new_tag}}"
       
   #    - name: Log into registry
   #     uses: docker/login-action@v1
