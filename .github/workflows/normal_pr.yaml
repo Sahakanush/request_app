@@ -20,7 +20,7 @@ jobs:
       - 
         uses: 8BitJonny/gh-get-current-pr@2.1.1
         id: PR       
-     
+     - run: echo "${{fromJSON(steps.PR.outputs.pr).draft}}"
       - 
         name: Check PR type
         if:  fromJSON(steps.PR.outputs.pr).draft  != false || fromJSON(steps.PR.outputs.pr).draft  == ''
