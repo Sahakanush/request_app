@@ -92,5 +92,5 @@ jobs:
           git config --global user.email "sahakanush.terteryan2003@gmail.com"
           
           git add .
-          git commit -m "Change Tag"
+          git commit -m "Channge Tag"
           git push
