@@ -23,7 +23,7 @@ jobs:
      
       - 
         name: Check PR type
-        if:  fromJSON(steps.PR.outputs.pr).draft  != false
+        if:  fromJSON(steps.PR.outputs.pr).draft  != false || fromJSON(steps.PR.outputs.pr).draft  == ''
         run: exit 1
         
         
