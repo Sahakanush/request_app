@@ -37,6 +37,7 @@ jobs:
               
       - 
         name: UT success
+        
         if: steps.Pytest.outcome == 'success'
         uses: wadeww/send-email-action@master
         with:
