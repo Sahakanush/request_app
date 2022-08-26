@@ -47,7 +47,7 @@ jobs:
         
       - if: github.event_name == 'pull_request'
         run: echo "git_tag=0.0.1-RC.1" >> $GITHUB_ENV
-      - run: echo "${{env.git_tag}}"
+
       - name: Log into registry
         uses: docker/login-action@v1
         with:
