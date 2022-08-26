@@ -27,7 +27,6 @@ def ping_to_server():
         except:
             return "", 504
             
- 
 @app.route("/hello_world/")            
 def hello():
     return 'Hello, World!'
