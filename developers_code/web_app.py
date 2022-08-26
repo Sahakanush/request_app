@@ -26,10 +26,13 @@ def ping_to_server():
             return image
         except:
             return "", 504
-        
+            
+ 
 @app.route("/hello_world/")            
 def hello():
     return 'Hello, World!'
 
 if __name__ == "__main__":
   app.run(debug=False, host="0.0.0.0", port=80)
+
+
