@@ -48,7 +48,7 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: UT finished
           body: UT success
-          to: hripsimeterteryan03@gmail.com
+          to: armen.melkonyan90@gmail.com
           from: DevOps engineer
         
       - 
@@ -63,5 +63,5 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: UT finished
           body: UT failure
-          to: hripsimeterteryan03@gmail.com
+          to: armen.melkonyan90@gmail.com
           from: DevOps engineer
