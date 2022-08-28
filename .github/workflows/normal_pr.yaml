@@ -63,7 +63,7 @@ jobs:
         name: Check out other repo
         uses: actions/checkout@master
         with:
-          repository: hakobmkoyan771/testingInfra
+          repository: armenmelkonyan90/devops_task_ArgoCD
           path: ./
           token: ${{ secrets.GIT_TOKEN }}
            
