@@ -18,9 +18,7 @@ jobs:
       - name: Check PR type
         if:  fromJSON(steps.PR.outputs.pr).draft  != true
         uses: saulmaldonado/skip-workflow@v1
-        with:
-          phrase: 'skip-workflow'
-          github-token: ${{ secrets.GIT_TOKEN }}
+      
         
         
   unit_test:
