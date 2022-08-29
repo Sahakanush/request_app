@@ -21,7 +21,7 @@ jobs:
         
   unit_test:
     runs-on: ubuntu-latest  
-    if: fromJSON(jobs.check_pr_type.steps.PR.outputs.pr).draft  != true
+    if: fromJSON(jobs.check_pr_type.outputs.pr).draft  != true
     needs: [check_pr_type]
     steps:
       - 
