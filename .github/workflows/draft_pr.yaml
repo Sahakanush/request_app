@@ -15,13 +15,13 @@ jobs:
         uses: 8BitJonny/gh-get-current-pr@2.1.1
         id: PR       
       
-   #   - name: Check PR type
-   #     if:  fromJSON(steps.PR.outputs.pr).draft  != true
- #       run: exit 1
+      - name: Check PR type
+        run: echo "git_tag=${{fromJSON(steps.PR.outputs.pr).draft}}" >> $GITHUB_ENV
+        
         
   unit_test:
     runs-on: ubuntu-latest  
-    if: fromJSON(check_pr_type.steps.PR.outputs.pr).draft  != true
+    if:  ${{env.git_tag}}  != true
     needs: [check_pr_type]
     steps:
       - 
