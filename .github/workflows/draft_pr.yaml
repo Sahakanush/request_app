@@ -16,12 +16,15 @@ jobs:
         id: PR       
       
       - name: Check PR type
-        run: echo "git_tag=${{fromJSON(steps.PR.outputs.pr).draft}}" >> $GITHUB_ENV
+        if:  fromJSON(steps.PR.outputs.pr).draft  != true
+        uses: saulmaldonado/skip-workflow@v1
+        with:
+          phrase: 'skip-workflow'
+          github-token: ${{ secrets.GIT_TOKEN }}
         
         
   unit_test:
     runs-on: ubuntu-latest  
-    if:  ${{env.git_tag}}  != true
     needs: [check_pr_type]
     steps:
       - 
