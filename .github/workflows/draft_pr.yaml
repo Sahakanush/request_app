@@ -17,8 +17,7 @@ jobs:
       
       - name: Check PR type
         if:  fromJSON(steps.PR.outputs.pr).draft  != true
-        uses: saulmaldonado/skip-workflow@v1
-      
+        run: exit 1
         
         
   unit_test:
