@@ -15,12 +15,13 @@ jobs:
         uses: 8BitJonny/gh-get-current-pr@2.1.1
         id: PR       
       
-      - name: Check PR type
-        if:  fromJSON(steps.PR.outputs.pr).draft  != true
-        run: exit 1
+   #   - name: Check PR type
+   #     if:  fromJSON(steps.PR.outputs.pr).draft  != true
+ #       run: exit 1
         
   unit_test:
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest  
+    if: fromJSON(jobs.check_pr_type.steps.PR.outputs.pr).draft  != true
     needs: [check_pr_type]
     steps:
       - 
