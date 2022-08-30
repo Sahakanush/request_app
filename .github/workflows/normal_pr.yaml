@@ -52,6 +52,7 @@ jobs:
         run: echo "git_tag=${{steps.tag_version.outputs.new_version}}" >> $GITHUB_ENV
           
       -
+        if: github.event_name == 'pull_request'
         id: latest_tag
         uses: jimschubert/query-tag-action@v1              
       
