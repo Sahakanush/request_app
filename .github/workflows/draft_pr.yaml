@@ -9,11 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - 
+        name: Checkout repository
         uses: actions/checkout@v3  
         
       - 
+        name: Get current PR info
+        id: PR 
         uses: 8BitJonny/gh-get-current-pr@2.1.1
-        id: PR       
+              
       
       - name: Check PR type
         if:  fromJSON(steps.PR.outputs.pr).draft  != true
@@ -25,11 +28,13 @@ jobs:
     needs: [check_pr_type]
     steps:
       - 
-        uses: actions/checkout@v3    
+        name: Checkout repository
+        uses: actions/checkout@v3   
+        
       - 
         name: Run Unit Test
-        working-directory: ./developers_code
         id: Pytest
+        working-directory: ./developers_code
         
         run: |
           pip3 install -r ../.github/requirements_for_pytest.txt         
