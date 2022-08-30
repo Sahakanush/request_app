@@ -58,8 +58,7 @@ jobs:
       - 
         if: github.event_name == 'push'
         run: echo "::set-output name=tag::${{steps.tag_version.outputs.new_version}}"
-        
-      - run: echo "${{outputs.tag}}"
+
   ACR_operations:
     runs-on: ubuntu-latest    
     needs: [Get_tag]
