@@ -41,9 +41,9 @@ jobs:
         id: latest_tag
         uses: jimschubert/query-tag-action@v1              
       
-      - 
-        if: github.event_name == 'pull_request'
-        run: echo "::set-output name=tag::${{steps.latest_tag.outputs.tag}}"
+      #- 
+      #  if: github.event_name == 'pull_request'
+      #  run: echo "::set-output name=tag::${{steps.latest_tag.outputs.tag}}"
         
       -
         name: Create new tag  
