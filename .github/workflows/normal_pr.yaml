@@ -58,8 +58,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       
-        uses: kazoohr/rc-branch-action@main
-        env:
+      -  uses: kazoohr/rc-branch-action@main
+         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
       -
         name: Create new tag  
