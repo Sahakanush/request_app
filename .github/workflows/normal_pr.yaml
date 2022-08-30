@@ -35,16 +35,8 @@ jobs:
       - 
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          
-      -
-        id: latest_tag
-        uses: jimschubert/query-tag-action@v1              
+          ref: ${{ github.event.pull_request.head.ref }}          
       
-      #- 
-      #  if: github.event_name == 'pull_request'
-      #  run: echo "::set-output name=tag::${{steps.latest_tag.outputs.tag}}"
-        
       -
         name: Create new tag  
         if: github.event_name == 'push'
@@ -58,6 +50,15 @@ jobs:
       - 
         if: github.event_name == 'push'
         run: echo "::set-output name=tag::${{steps.tag_version.outputs.new_version}}"
+          
+      -
+        id: latest_tag
+        uses: jimschubert/query-tag-action@v1              
+      
+      - 
+        if: github.event_name == 'pull_request'
+        run: echo "::set-output name=tag::${{steps.latest_tag.outputs.tag}}"
+        
 
   ACR_operations:
     runs-on: ubuntu-latest    
