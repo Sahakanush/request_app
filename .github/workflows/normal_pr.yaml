@@ -61,7 +61,7 @@ jobs:
         
       -
         id: get_tag
-        run: echo "::set-output name=tag::env.git_tag"
+        run: echo "::set-output name=tag::${{env.git_tag}}"
         
   ACR_operations:
     runs-on: ubuntu-latest    
