@@ -31,12 +31,7 @@ jobs:
     outputs:
       tag: ${{ steps.latest_tag.outputs.tag }}
       
-    steps:     
-      - 
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}          
-      
+    steps:             
       -
         name: Create new tag  
         if: github.event_name == 'push'
@@ -45,7 +40,12 @@ jobs:
         with:
           github_token: ${{ secrets.GIT_TOKEN }}
           append_to_pre_release_tag: RC
-          tag_prefix: ''
+          tag_prefix: ''          
+          
+      - 
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
           
       - 
         if: github.event_name == 'push'
