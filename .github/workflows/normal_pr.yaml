@@ -84,7 +84,7 @@ jobs:
           registry: ${{ secrets.ACR_ENDPOINT }}
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
-          
+      - run: echo "${{needs.Tag_operations.outputs.tag}}"
       - 
         name: Build & Push
         uses: docker/build-push-action@v2
