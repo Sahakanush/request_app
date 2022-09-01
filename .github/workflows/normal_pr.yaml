@@ -1,6 +1,6 @@
 name: normal_pr
 
-on:
+on: 
   push: 
     branches: feature        
     
