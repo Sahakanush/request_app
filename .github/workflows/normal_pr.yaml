@@ -105,7 +105,7 @@ jobs:
            
       - 
         name: Change tag 
-        working-directory: ../request_app/.github/
+       # working-directory: ../request_app/.github/
         run: |   
           ls
           pip install pyyaml  
