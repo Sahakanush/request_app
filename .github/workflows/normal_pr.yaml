@@ -13,12 +13,11 @@ jobs:
     steps:
       - 
         name: Checkout repository
-        #uses: actions/checkout@v3  
-        run: ls
+        uses: actions/checkout@v3  
         
       - 
         name: Get current PR info
-        if: github.event_name == 'push'
+        #if: github.event_name == 'push'
         id: PR
         uses: 8BitJonny/gh-get-current-pr@2.1.1        
         
