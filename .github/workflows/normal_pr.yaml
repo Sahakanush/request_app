@@ -23,7 +23,7 @@ jobs:
         
       - 
         name: Check PR type
-        if: fromJSON(steps.PR.outputs.pr).draft != false && github.event_name == 'push'
+        if: github.event_name == 'push' && fromJSON(steps.PR.outputs.pr).draft != false
         run: exit 1
         
   Tag_operations:
