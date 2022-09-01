@@ -8,7 +8,7 @@ on:
     types: [ready_for_review]
     
 jobs:   
-  Check_pr_type:    
+  Check_pr_type:     
     runs-on: ubuntu-latest
     steps: 
       - 
