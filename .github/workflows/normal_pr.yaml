@@ -2,8 +2,7 @@ name: normal_pr
 
 on:
   push:
-    branches: feature
-    
+    branches: feature    
   pull_request:
     types: [ready_for_review]
     
