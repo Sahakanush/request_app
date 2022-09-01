@@ -107,7 +107,7 @@ jobs:
         name: Change tag 
        # working-directory: ../request_app/.github/
         run: |   
-          ls
+          ls ../
           pip install pyyaml  
           python3 change_tag.py ${{secrets.ACR_USERNAME}}/request_app:${{needs.Tag_operations.outputs.tag}}
 
