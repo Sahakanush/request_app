@@ -17,7 +17,7 @@ jobs:
         
       - 
         name: Get current PR info
-        #if: github.event_name == 'push'
+        if: github.event_name == 'push'
         id: PR
         uses: 8BitJonny/gh-get-current-pr@2.1.1        
         
