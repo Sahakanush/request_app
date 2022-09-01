@@ -8,8 +8,7 @@ on:
     types: [ready_for_review]
     
 jobs:   
-  Check_pr_type:
-    if: github.event_name == 'push'
+  Check_pr_type:    
     runs-on: ubuntu-latest
     steps:
       - 
@@ -18,12 +17,13 @@ jobs:
         
       - 
         name: Get current PR info
+        if: github.event_name == 'push'
         id: PR
         uses: 8BitJonny/gh-get-current-pr@2.1.1        
         
       - 
         name: Check PR type
-        if: fromJSON(steps.PR.outputs.pr).draft != false 
+        if: fromJSON(steps.PR.outputs.pr).draft != false && github.event_name == 'push'
         run: exit 1
         
   Tag_operations:
@@ -90,7 +90,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{secrets.ACR_USERNAME}}/request_app:${{needs.Tag_operations.outputs.tag}}
+          tags: ${{secrets.ACR_ENDPOINT}}/request_app:${{needs.Tag_operations.outputs.tag}}
             
   Change_manifest_image:
     runs-on: ubuntu-latest     
@@ -115,7 +115,7 @@ jobs:
         working-directory: request_app/.github/
         run: |   
           pip install pyyaml  
-          python3 change_tag.py ${{secrets.ACR_USERNAME}}/request_app:${{needs.Tag_operations.outputs.tag}}
+          python3 change_tag.py ${{secrets.ACR_ENDPOINT}}/request_app:${{needs.Tag_operations.outputs.tag}}
 
       -
         name: Push new image to GitHub
