@@ -88,7 +88,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.ACR_ENDPOINT }}/request_app:${{needs.Tag_operations.outputs.tag}}
+          tags: ${{secrets.ACR_USERNAME}}/request_app:${{needs.Tag_operations.outputs.tag}}
             
   Change_manifest_image:
     runs-on: ubuntu-latest     
@@ -105,10 +105,11 @@ jobs:
            
       - 
         name: Change tag 
-        working-directory: request_app/.github/
+        working-directory: ../request_app/.github/
         run: |   
+          ls
           pip install pyyaml  
-          python3 change_tag.py ${{ secrets.ACR_USERNAME }}/request_app:${{needs.Tag_operations.outputs.tag}}
+          python3 change_tag.py ${{secrets.ACR_USERNAME}}/request_app:${{needs.Tag_operations.outputs.tag}}
 
       -
         name: Push new image to GitHub
