@@ -109,13 +109,14 @@ jobs:
         name: Clone application repo        
         run: |
           git clone --branch feature https://.:${{ secrets.GIT_TOKEN }}@github.com/Sahakanush/request_app
-           
+          cd request_app          
+          echo "git_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
       - 
         name: Change tag 
         working-directory: request_app/.github/
         run: |   
           pip install pyyaml  
-          python3 change_tag.py ${{secrets.ACR_ENDPOINT}}/request_app:${{ needs.Tag_operations.outputs.tag }}
+          python3 change_tag.py ${{secrets.ACR_USERNAME}}/request_app:${{env.git_tag}}
 
       -
         name: Push new image to GitHub
