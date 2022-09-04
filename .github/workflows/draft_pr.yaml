@@ -9,25 +9,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - 
+        name: Checkout repository
         uses: actions/checkout@v3  
         
-      - uses: 8BitJonny/gh-get-current-pr@2.1.1
-        id: PR       
+      - 
+        name: Get current PR info
+        id: PR 
+        uses: 8BitJonny/gh-get-current-pr@2.1.1
+              
       
       - name: Check PR type
         if:  fromJSON(steps.PR.outputs.pr).draft  != true
         run: exit 1
         
+        
   unit_test:
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest  
     needs: [check_pr_type]
     steps:
       - 
-        uses: actions/checkout@v3    
+        name: Checkout repository
+        uses: actions/checkout@v3   
+        
       - 
         name: Run Unit Test
-        working-directory: ./developers_code
         id: Pytest
+        working-directory: ./developers_code
         
         run: |
           pip3 install -r ../.github/requirements_for_pytest.txt         
@@ -38,11 +45,29 @@ jobs:
       - 
         name: UT success
         
-        if: steps.Pytest.outcome == 'success'         
-        run: echo "UT success !!"
+        if: steps.Pytest.outcome == 'success'
+        uses: wadeww/send-email-action@master
+        with:
+          server_address: smtp.gmail.com
+          port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: UT finished
+          body: UT success
+          to: armen.melkonyan90@gmail.com
+          from: DevOps engineer
         
       - 
         name: UT failure
         
         if: steps.Pytest.outcome != 'success'         
-        run: echo "UT failure !!"
+        uses: wadeww/send-email-action@master
+        with:
+          server_address: smtp.gmail.com
+          port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: UT finished
+          body: UT failure
+          to: armen.melkonyan90@gmail.com
+          from: DevOps engineer
