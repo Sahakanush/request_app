@@ -1,8 +1,8 @@
 name: draft_pr
 
 on:
-#  push:
-#    branches: feature
+  push:
+    branches: feature
     
 jobs:
   check_pr_type:
